@@ -69,6 +69,66 @@ tester.run('html-quotes', rule, {
   invalid: [
     {
       filename: 'test.vue',
+      code: '<template><div title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div title="someFunc(&quot;some foo string&quot;)"></div></template>',
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div :title="someFunc(\'some foo string\')"></div></template>',
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div v-bind:title="someFunc(\'some foo string\')"></div></template>',
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div title="someFunc(&quot;some foo string&quot;)"></div></template>',
+      options: ['double'],
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div :title="someFunc(\'some foo string\')"></div></template>',
+      options: ['double'],
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:title=\'someFunc("some foo string")\'></div></template>',
+      output: '<template><div v-bind:title="someFunc(\'some foo string\')"></div></template>',
+      options: ['double'],
+      errors: ['Expected to be enclosed by double quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div title="someFunc(\'some foo string\')"></div></template>',
+      output: '<template><div title=\'someFunc(&apos;some foo string&apos;)\'></div></template>',
+      options: ['single'],
+      errors: ['Expected to be enclosed by single quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div :title="someFunc(\'some foo string\')"></div></template>',
+      output: '<template><div :title=\'someFunc("some foo string")\'></div></template>',
+      options: ['single'],
+      errors: ['Expected to be enclosed by single quotes.']
+    },
+    {
+      filename: 'test.vue',
+      code: '<template><div v-bind:title="someFunc(\'some foo string\')"></div></template>',
+      output: '<template><div v-bind:title=\'someFunc("some foo string")\'></div></template>',
+      options: ['single'],
+      errors: ['Expected to be enclosed by single quotes.']
+    },
+    {
+      filename: 'test.vue',
       code: '<template><div class=foo></div></template>',
       output: '<template><div class="foo"></div></template>',
       errors: ['Expected to be enclosed by double quotes.']
